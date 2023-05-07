@@ -32,8 +32,8 @@ contactRouter.post("/create",async(req,res)=>{
 try {
     console.log(req.body)
     let newContact = new contactModel(req.body)
-    await newContact.save()
-    res.send("Contact has been created")
+   let contact= await newContact.save()
+    res.send(contact)
 } catch (error) {
     res.send(error.message)
     
