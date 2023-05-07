@@ -41,23 +41,21 @@ let user= await userModel.find({email})
 if(user.length){
     bcrypt.compare(req.body.password,user[0].password,(err,result)=>{
         if(err){
-            res.send("please enter correct email/password")
+            res.status(400).send(error.message)
         }
         if(result){
             const token= jwt.sign({user:user[0]._id},"masai")
             res.send({"mes":"login success","token":token})
         }
-        else{
-            res.send("please enter correct email/password")
-        }
+      
     })
 }
 else {
-    res.send("please enter correct email/password")
+    res.status(400).send("invalid email/password")
 }
     }
-    catch{
-res.send("can not login")
+    catch(e){
+        res.status(400).send(e.message)
     }
 })
 

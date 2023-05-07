@@ -35,7 +35,7 @@ try {
    let contact= await newContact.save()
     res.send(contact)
 } catch (error) {
-    res.send(error.message)
+    res.status(400).send(error.message)
     
 }
 })
@@ -48,7 +48,7 @@ contactRouter.delete("/deleteContact/:id",async(req, res)=>{
         await contactModel.findByIdAndDelete(req.params.id)
         res.send("Contact has been deleted")
     } catch (error) {
-        
+        res.status(400).send(error.message)
     }
 })
 
@@ -60,7 +60,7 @@ try {
     res.send("Contact has been updated")
 
 } catch (error) {
-    res.send(error.message)
+    res.status(400).send(error.message)
 }
 })
 module.exports ={
