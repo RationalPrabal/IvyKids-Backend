@@ -7,7 +7,7 @@ const contactRouter= express.Router()
 
 contactRouter.get("/",async(req,res)=>{
     const {name,sort} = req.query
-    console.log(req.query)
+   
     try{
         let contacts;
         if(name!=="undefined"&&name!==""){
@@ -22,7 +22,8 @@ contactRouter.get("/",async(req,res)=>{
 res.send(contacts)
     }
     catch(err){
-        res.status(400).send("please login")
+        console.log(err)
+        res.status(400).send(err.message)
     }
 })
 
