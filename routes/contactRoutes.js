@@ -22,7 +22,7 @@ contactRouter.get("/",async(req,res)=>{
 res.send(contacts)
     }
     catch(err){
-        res.send("Please Login")
+        res.status(400).send("please login")
     }
 })
 
