@@ -6,8 +6,19 @@ const contactRouter= express.Router()
 //! Get the contacts
 
 contactRouter.get("/",async(req,res)=>{
+    const {name,sort} = req.query
+    console.log(req.query)
     try{
-const contacts= await contactModel.find({author:{$eq:req.body.author}})
+        let contacts;
+        if(name!=="undefined"&&name!==""){
+ contacts= await contactModel.find({author:{$eq:req.body.author},name:{$eq:name}})
+        }
+        else if(sort!=="undefined"){ 
+            contacts= await contactModel.find({author:{$eq:req.body.author}}).sort({name:sort})
+        }
+        else {
+            contacts= await contactModel.find({author:{$eq:req.body.author}})
+        }
 res.send(contacts)
     }
     catch(err){

@@ -2,7 +2,6 @@ const jwt= require("jsonwebtoken")
 
 const authentication=(req,res,next)=>{
 let token= req.headers.authorization
-
 if(token){
     jwt.verify(token,"masai",(err,decoded)=>{
         if(decoded){
